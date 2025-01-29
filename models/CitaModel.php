@@ -1,6 +1,6 @@
 <?php
 
-    require_once "./database/DBHAndler.php";
+    require_once "./database/DBHandler.php";
     class CitaModel {
         private $nombreTabla = "citas"; // NOMBRE DE LA TABLA DE LA BASE DE DATOS
         private $conexion;              // ATRIBUTO QUE ALMACENARÁ LA CONEXIÓN A LA BASE DE DATOS
