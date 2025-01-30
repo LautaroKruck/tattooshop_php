@@ -1,23 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/citasStyles/styles_altaCorrecta.css">
     <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>AltaCorrecta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Cita Confirmada</title>
 </head>
 
 <body>
 
-    <h1>ALTA CORRECTA</h1>
+    <main class="container mt-5">
+        <div class="card p-4 shadow">
+            <h2 class="text-center text-success">Cita Registrada con Éxito</h2>
+
+            <div class="mt-4">
+                <p><strong>Fecha y Hora:</strong> <?= htmlspecialchars($fecha_cita) ?></p>
+                <p><strong>Descripción:</strong> <?= htmlspecialchars($descripcion) ?></p>
+                <p><strong>Cliente:</strong> <?= htmlspecialchars($cliente) ?></p>
+            </div>
+
+            <h4 class="mt-4">Datos del Tatuador</h4>
+            <div class="d-flex align-items-center">
+                <img src="<?= htmlspecialchars($tatuador_foto) ?>" alt="Foto del tatuador" width="100" class="rounded-circle me-3">
+                <div>
+                    <p><strong>Nombre:</strong> <?= htmlspecialchars($tatuador_nombre) ?></p>
+                    <p><strong>Email:</strong> <?= htmlspecialchars($tatuador_email) ?></p>
+                </div>
+            </div>
+
+            <a href="/tattooshop_php" class="btn btn-primary mt-4">Volver al inicio</a>
+        </div>
+    </main>
 
 </body>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
