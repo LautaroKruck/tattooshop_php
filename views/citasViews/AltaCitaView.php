@@ -24,7 +24,7 @@
                         class="shadow form-control"
                         id="input_descripcion"
                         name="input_descripcion"
-                        value="<?= htmlspecialchars($_POST['input_descripcion'] ?? '') ?>"
+                        value="<?= isset($_POST['input_descripcion']) ? htmlspecialchars($_POST['input_descripcion']) : '' ?>"
                         placeholder="Introduce la descripción de la cita">
                     <?php if (isset($errores["error_descripcion"])): ?>
                         <small class="form-text text-danger"><?= $errores["error_descripcion"] ?></small>
@@ -37,7 +37,8 @@
                         class="shadow form-control"
                         id="input_fecha_cita"
                         name="input_fecha_cita"
-                        value="<?= htmlspecialchars($_POST['input_fecha_cita'] ?? '') ?>">
+                        value="<?= isset($_POST['input_fecha_cita']) ? htmlspecialchars($_POST['input_fecha_cita']) : '' ?>"
+                        min="<?= date('Y-m-d\TH:i') ?>">
                 </div>
 
                 <div class="form-group">
@@ -46,17 +47,27 @@
                         class="shadow form-control"
                         id="input_cliente"
                         name="input_cliente"
-                        value="<?= htmlspecialchars($_POST['input_cliente'] ?? '') ?>"
+                        value="<?= isset($_POST['input_cliente']) ? htmlspecialchars($_POST['input_cliente']) : '' ?>"
                         placeholder="Nombre del cliente">
                 </div>
 
                 <div class="form-group">
                     <label class="fw-lighter text-white" for="input_tatuador">Tatuador</label>
                     <select class="shadow form-control" id="input_tatuador" name="input_tatuador">
-                        <option value="">Seleccione un tatuador</option>
+                    <option value="">Seleccione un tatuador</option>
+                    <?php if (!empty($tatuadores) && is_array($tatuadores)): ?>
                         <?php foreach ($tatuadores as $tatuador): ?>
-                            <option value="<?= $tatuador['id'] ?>"><?= $tatuador['nombre'] ?></option>
+                            <?php 
+                                $tatuador_id = htmlspecialchars($tatuador['id']);
+                                $tatuador_nombre = htmlspecialchars($tatuador['nombre']);
+                                $selected = (isset($_POST['input_tatuador']) && $_POST['input_tatuador'] == $tatuador_id) ? 'selected' : '';
+                            ?>
+                            <option value="<?= $tatuador_id ?>" <?= $selected ?>><?= $tatuador_nombre ?></option>
                         <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">No hay tatuadores disponibles</option>
+                    <?php endif; ?>
+
                     </select>
                 </div>
 

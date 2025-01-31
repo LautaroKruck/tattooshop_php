@@ -14,47 +14,47 @@
     */
    
     // Cargamos los controladores que necesitamos.
+    require_once "./database/DBHandler.php";
     require_once "./controllers/CitaController.php";
     require_once "./controllers/TatuadorController.php";
+    require_once "./models/TatuadorModel.php";
+    require_once "./models/CitaModel.php";
 
-    // QUIERO OBTENER LA URL DE LA PETICIÓN
+    // Crear conexión a la base de datos
+    $tatuadorModel = new TatuadorModel();
+    $citaModel = new CitaModel();
+
+    // Obtener la URL de la petición
     $requestUri = $_SERVER["REQUEST_URI"] ?? "";
 
-    // QUEREMOS LLAMAR A UN CONTROLLER U OTRO DEPENDIENDO DE LA $REQUESTURI
     switch ($requestUri) {
-        // 1er caso -> si llamamos a la uri de alta en citas
-        case "/xampp_php/tattooshop_php/citas/alta":
+        case "/tattooshop_php/citas/alta":
             $citaController = new CitaController();
-            $requestMethod = $_SERVER["REQUEST_METHOD"]; // va a ser GET o POST
+            $requestMethod = $_SERVER["REQUEST_METHOD"];
             
-            if($requestMethod == "GET") {
+            if ($requestMethod == "GET") {
                 $citaController->showAltaCita();
-            } elseif($requestMethod == "POST") {
+            } elseif ($requestMethod == "POST") {
                 $datos = $_POST ?? [];
                 $citaController->insertCita($datos);
             }
-
-            
             break;
-        // 2º caso -> si llamamos a la uri de alta en tatuadores
-        case "/xampp_php/tattooshop_php/tatuadores/alta":
+        
+        case "/tattooshop_php/tatuadores/alta":
             $tatuadorController = new TatuadorController();
-            $requestMethod = $_SERVER["REQUEST_METHOD"]; // va a ser GET o POST
+            $requestMethod = $_SERVER["REQUEST_METHOD"];
             
-            if($requestMethod == "GET") {
+            if ($requestMethod == "GET") {
                 $tatuadorController->showAltaTatuador();
-            } elseif($requestMethod == "POST") {
+            } elseif ($requestMethod == "POST") {
                 $datos = $_POST ?? [];
                 $tatuadorController->insertTatuador($datos);
             }
-
-            
             break;
-        // caso por defecto -> llamamos a 404
+        
         default:
-            echo "<h1>PAGINA NO ENCONTRADA</h1>";
+            echo "<h1>PÁGINA NO ENCONTRADA</h1>";
             break;
     }
-
 
 ?>

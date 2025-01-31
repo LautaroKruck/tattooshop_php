@@ -22,9 +22,9 @@ class TatuadorController {
      */
     public function insertTatuador($datos = []) {
         // Extraer datos del formulario
-        $input_nombre = $datos["input_nombre"] ?? "";
-        $input_email = $datos["input_email"] ?? "";
-        $input_password = $datos["input_password"] ?? "";
+        $input_nombre = trim($datos["input_nombre"] ?? "");
+        $input_email = trim($datos["input_email"] ?? "");
+        $input_password = trim($datos["input_password"] ?? "");
         $input_foto = $datos["input_foto"] ?? "";
 
         // Validaciones
@@ -55,6 +55,12 @@ class TatuadorController {
         $operacionExitosa = $this->tatuadorModel->insertTatuador($input_nombre, $input_email, $hashed_password, $input_foto);
 
         if ($operacionExitosa) {
+            // Definir variables para la vista
+            $nombre = $input_nombre;
+            $email = $input_email;
+            $foto = $input_foto;
+
+             // Mostrar la vista de éxito
             require_once "./views/tatuadoresViews/AltaTatuadorCorrectaView.php";
         } else {
             $errores["error_db"] = "Error al insertar el tatuador, intentelo de nuevo más tarde";

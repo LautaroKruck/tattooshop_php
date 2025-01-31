@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/citasStyles/styles_altaCita.css">
+    <link rel="stylesheet" href="../public/css/Styles/styles_altaCita.css">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Alta Tatuador</title>
@@ -15,7 +15,7 @@
     <main class="body__main">
         <form class="main__form-plantilla <?= isset($errores) && !empty($errores) ? "main__form-plantilla-error" : "" ?>"
               action="/tattooshop_php/tatuadores/alta" 
-              method="post" enctype="multipart/form-data"> <!-- Enctype agregado si se sube una imagen -->
+              method="post">
 
             <div class="form-plantilla__container">
                 <div class="form-group">
@@ -24,7 +24,7 @@
                         class="shadow form-control"
                         id="input_nombre"
                         name="input_nombre"
-                        value="<?= htmlspecialchars($_POST['input_nombre'] ?? '') ?>"  <!-- Mantiene el valor tras error -->
+                        value="<?= isset($_POST['input_nombre']) ? htmlspecialchars($_POST['input_nombre']) : '' ?>"
                         placeholder="Introduce el nombre del tatuador">
                     <?php if (isset($errores["error_nombre"])): ?>
                         <small class="form-text text-danger"><?= $errores["error_nombre"] ?></small>
@@ -37,7 +37,7 @@
                         class="shadow form-control"
                         id="input_email"
                         name="input_email"
-                        value="<?= htmlspecialchars($_POST['input_email'] ?? '') ?>"
+                        value="<?= isset($_POST['input_email']) ? htmlspecialchars($_POST['input_email']) : '' ?>"
                         placeholder="Introduce tu correo electrónico">
                     <?php if (isset($errores["error_email"])): ?>
                         <small class="form-text text-danger"><?= $errores["error_email"] ?></small>
@@ -62,7 +62,7 @@
                         class="shadow form-control"
                         id="input_foto"
                         name="input_foto"
-                        value="<?= htmlspecialchars($_POST['input_foto'] ?? '') ?>"
+                        value="<?= isset($_POST['input_foto']) ? htmlspecialchars($_POST['input_foto']) : '' ?>"
                         placeholder="URL de la foto">
                     <input type="file" name="foto_archivo" class="form-control mt-2">
                 </div>
@@ -73,10 +73,6 @@
                 </div>
             </div>
         </form>
-
-        <?php if (isset($errores["error_db"])): ?>
-            <p class="text-danger"><?= $errores["error_db"] ?></p>
-        <?php endif; ?>
     </main>
 
 </body>

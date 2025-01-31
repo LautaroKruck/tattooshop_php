@@ -8,7 +8,7 @@ class TatuadorModel {
     private $dbHandler;             
 
     public function __construct() {
-        $this->dbHandler = new DBHandler("localhost", "root", "", "tattoos_bd", "3306");
+        $this->dbHandler = new DBHandler("localhost", "root", "", "tattooshop_bd", "3306");
     }
 
     /**
@@ -52,6 +52,34 @@ class TatuadorModel {
             $this->dbHandler->desconectar();
         }
     }
+    public function getAllTatuadores() {
+        $this->conexion = $this->dbHandler->conectar();
+        $sql = "SELECT id, nombre FROM $this->nombreTabla";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tatuadores = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        $this->dbHandler->desconectar();
+        return $tatuadores;
+    }
+
+    public function getTatuadorById($id) {
+        $this->conexion = $this->dbHandler->conectar();
+        
+        $sql = "SELECT nombre, email, foto FROM tatuadores WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        
+        $tatuador = $resultado->fetch_assoc();
+        
+        $stmt->close();
+        $this->dbHandler->desconectar();
+        
+        return $tatuador;
+    } 
 }
 
 ?>

@@ -8,7 +8,7 @@ class CitaModel {
     private $dbHandler;             
 
     public function __construct() {
-        $this->dbHandler = new DBHandler("localhost", "root", "", "tattoos_bd", "3306");
+        $this->dbHandler = new DBHandler("localhost", "root", "", "tattooshop_bd", "3306");
     }
 
     /**
@@ -36,14 +36,14 @@ class CitaModel {
         $checkStmt->close();
 
         // Query de inserción sin ID (se genera automáticamente)
-        $sql = "INSERT INTO $this->nombreTabla (descripcion, fechaCita, cliente, tatuador) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO $this->nombreTabla (descripcion, fecha_cita, cliente, tatuador) VALUES (?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("sssi", $descripcion, $fechaCita, $cliente, $tatuador);
 
         try {
-            return $stmt->execute();
+            return $stmt->execute(); // Ejecutar la consulta de inserción
         } catch (Exception $e) {
-            return false;
+            return false; // Si hay error, retornar falso
         } finally {
             $stmt->close();
             $this->dbHandler->desconectar();

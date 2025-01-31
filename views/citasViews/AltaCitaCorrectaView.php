@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/citasStyles/styles_altaCorrecta.css">
+    <link rel="stylesheet" href="../public/css/Styles/styles_altaCorrecta.css">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Cita Confirmada</title>
@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <a href="/tattooshop_php" class="btn btn-primary mt-4">Volver al inicio</a>
+            <a href="/tattooshop_php/citas/alta" class="btn btn-primary mt-4">Volver al inicio</a>
         </div>
     </main>
 
